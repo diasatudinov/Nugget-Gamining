@@ -1,3 +1,10 @@
+//
+//  RMGShopViewModel.swift
+//  Nugget Gamining
+//
+//
+
+
 import SwiftUI
 
 
