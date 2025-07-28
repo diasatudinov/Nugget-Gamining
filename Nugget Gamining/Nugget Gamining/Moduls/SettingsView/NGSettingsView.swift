@@ -2,17 +2,80 @@
 //  NGSettingsView.swift
 //  Nugget Gamining
 //
-//  Created by Dias Atudinov on 28.07.2025.
 //
 
 import SwiftUI
 
 struct NGSettingsView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var settingsVM: ITTPSettingsViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            
+            VStack(alignment: .center, spacing: 0) {
+                
+                HStack(alignment: .top) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                        
+                    } label: {
+                        Image(.backIconNG)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140:72)
+                    }
+                    Spacer()
+                    
+                    NGCoinBg()
+                }.padding([.horizontal, .top])
+                
+                
+                ZStack {
+                    
+                    Image(.settingsBgNG)
+                        .resizable()
+                        .scaledToFit()
+                    
+                    HStack(spacing: 60) {
+                        Image(.soundsTextNG)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 40:26)
+                        
+                        Button {
+                            withAnimation {
+                                settingsVM.soundEnabled.toggle()
+                            }
+                        } label: {
+                            HStack(spacing: 20) {
+                                
+                                Image(settingsVM.soundEnabled ? .onNG:.yesNG)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:72)
+                                
+                                Image(settingsVM.soundEnabled ? .noNG:.offNG)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:72)
+                            }
+                        }
+                    }.padding(.horizontal, RMGDeviceManager.shared.deviceType == .pad ? 60:32)
+                }.frame(width: RMGDeviceManager.shared.deviceType == .pad ? 750:440,height: RMGDeviceManager.shared.deviceType == .pad ? 400:260)
+                Spacer()
+            }.padding()
+        }.background(
+            ZStack {
+                Image(.appBgNG)
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .scaledToFill()
+            }
+        )
     }
 }
 
 #Preview {
-    NGSettingsView()
+    NGSettingsView(settingsVM: ITTPSettingsViewModel())
 }
