@@ -2,14 +2,74 @@
 //  NGDailyTasksView.swift
 //  Nugget Gamining
 //
-//  Created by Dias Atudinov on 28.07.2025.
 //
 
 import SwiftUI
 
 struct NGDailyTasksView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var isRecieved = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            
+            VStack(alignment: .center, spacing: 0) {
+                
+                HStack(alignment: .top) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                        
+                    } label: {
+                        Image(.backIconNG)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(
+                                height: RMGDeviceManager.shared.deviceType == .pad ? 140:72
+                            )
+                    }
+                    Spacer()
+                    
+                    NGCoinBg()
+                }.padding([.horizontal, .top])
+                
+                
+                ZStack {
+                    
+                    Image(.dailyTasksBgNG)
+                        .resizable()
+                        .scaledToFit()
+                    
+                    VStack {
+                        Spacer()
+                        
+                        Button {
+                            withAnimation {
+                                isRecieved.toggle()
+                            }
+                        } label: {
+                            
+                            
+                            Image(isRecieved ? .recievedBtnNG:.recieveBtnNG)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:72)
+                        }
+                    }
+                }.frame(
+                    width: RMGDeviceManager.shared.deviceType == .pad ? 750:440,
+                    height: RMGDeviceManager.shared.deviceType == .pad ? 400:260
+                )
+                
+                Spacer()
+            }.padding()
+        }.background(
+            ZStack {
+                Image(.appBgNG)
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .scaledToFill()
+            }
+        )
     }
 }
 
