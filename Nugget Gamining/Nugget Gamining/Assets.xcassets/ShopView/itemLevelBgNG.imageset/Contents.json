@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "itemLevelBgNG.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
