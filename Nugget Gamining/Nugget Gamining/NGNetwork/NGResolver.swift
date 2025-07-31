@@ -1,5 +1,5 @@
 //
-//  RMGResolver.swift
+//  NGResolver.swift
 //  Nugget Gamining
 //
 //

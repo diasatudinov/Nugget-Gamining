@@ -15,9 +15,9 @@ struct NGMenuView: View {
     @State private var showCalendar = false
     @State private var showDailyTask = false
     
-    @StateObject var achievementVM = RMGAchievementsViewModel()
-    @StateObject var settingsVM = ITTPSettingsViewModel()
-    @StateObject var shopVM = RMGShopViewModel()
+    @StateObject var achievementVM = NGAchievementsViewModel()
+    @StateObject var settingsVM = NGSettingsViewModel()
+    @StateObject var shopVM = NGShopViewModel()
     
     var body: some View {
         
@@ -31,7 +31,7 @@ struct NGMenuView: View {
                         Image(.settingsIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:60)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:60)
                     }
                     
                     Spacer()
@@ -47,7 +47,7 @@ struct NGMenuView: View {
                         Image(.playIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 120:70)
                     }
                     
                     Button {
@@ -56,7 +56,7 @@ struct NGMenuView: View {
                         Image(.achievementsIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 120:70)
                     }
                     
                     Button {
@@ -65,7 +65,7 @@ struct NGMenuView: View {
                         Image(.shopIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 120:70)
                     }
                     
                     Button {
@@ -74,7 +74,7 @@ struct NGMenuView: View {
                         Image(.dailyTasksIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 120:70)
                     }
                 }
                 Spacer()
@@ -89,7 +89,7 @@ struct NGMenuView: View {
             }
         )
         .fullScreenCover(isPresented: $showGame) {
-            RoundSelectionView()
+            NGRoundSelectionView()
         }
         .fullScreenCover(isPresented: $showAchievement) {
             NGAchievementsView(viewModel: achievementVM)

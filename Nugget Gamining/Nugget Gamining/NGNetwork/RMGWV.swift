@@ -35,8 +35,8 @@ struct RMGWV: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             if let url = webView.url {
                 
-                if RMGLinks.shared.finalURL == nil {
-                    RMGLinks.shared.finalURL = url
+                if NGLinks.shared.finalURL == nil {
+                    NGLinks.shared.finalURL = url
                 }
                
             }
@@ -59,7 +59,7 @@ struct RMGWV: UIViewRepresentable {
     }
 }
 
-struct RMGWVWrap: View {
+struct NGWVWrap: View {
     @State private var nAllow = true
     var urlString = ""
     @AppStorage("firstOpen") var firstOpen = true
@@ -80,7 +80,7 @@ struct RMGWVWrap: View {
                         }
                 }
             } else {
-                if let url = RMGLinks.shared.finalURL {
+                if let url = NGLinks.shared.finalURL {
                     RMGWV(initialURL: url)
                         .onAppear {
                            

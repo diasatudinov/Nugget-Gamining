@@ -7,8 +7,8 @@
 
 import UIKit
 
-class RMGDeviceManager {
-    static let shared = RMGDeviceManager()
+class NGDeviceManager {
+    static let shared = NGDeviceManager()
     
     var deviceType: UIUserInterfaceIdiom
     

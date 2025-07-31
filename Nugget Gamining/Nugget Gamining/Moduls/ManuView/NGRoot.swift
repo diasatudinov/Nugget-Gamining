@@ -16,7 +16,7 @@ struct NGRoot: View {
     var body: some View {
         ZStack {
             if verse == 1 {
-                RMGWVWrap(urlString: RMGLinks.winStarData)
+                NGWVWrap(urlString: NGLinks.winStarData)
             } else {
                 VStack {
                     if isLoading {
@@ -44,9 +44,9 @@ struct NGRoot: View {
     }
     
     func updateIfNeeded() {
-        if RMGLinks.shared.finalURL == nil {
+        if NGLinks.shared.finalURL == nil {
             Task {
-                if await !RMGResolver.checking() {
+                if await !NGResolver.checking() {
                     verse = 1
                     toUp = false
                     isLoading = false
