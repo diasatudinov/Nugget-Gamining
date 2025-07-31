@@ -39,7 +39,7 @@ struct NGMenuView: View {
                     NGCoinBg()
                 }.padding()
                 
-                
+                Spacer()
                 VStack(spacing: 7) {
                     Button {
                         showGame = true
@@ -77,6 +77,7 @@ struct NGMenuView: View {
                             .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
                     }
                 }
+                Spacer()
             }
         }
         .background(

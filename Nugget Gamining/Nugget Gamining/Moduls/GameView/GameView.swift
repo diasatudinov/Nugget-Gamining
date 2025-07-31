@@ -221,11 +221,6 @@ struct RoundSelectionView: View {
     @State private var selectedRound: Round? = nil
     var body: some View {
         ZStack {
-            // Background image layer
-            Image(.appBgNG)
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 16) {
                 ZStack {
@@ -274,11 +269,17 @@ struct RoundSelectionView: View {
                                 
                             }
                         }
-                    }
+                    }.frame(width: RMGDeviceManager.shared.deviceType == .pad ? 800 : 400)
                 }
                 
             }
             .padding()
+            .background(
+                Image(.appBgNG)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            )
             .fullScreenCover(isPresented: $openLevel) {
                 if let round = selectedRound {
                     GameView(round: round)

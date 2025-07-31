@@ -1,3 +1,10 @@
+//
+//  RMGResolver.swift
+//  Nugget Gamining
+//
+//
+
+
 import Foundation
 
 class RMGResolver: NSObject, URLSessionTaskDelegate {

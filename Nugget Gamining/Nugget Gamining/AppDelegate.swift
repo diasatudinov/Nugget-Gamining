@@ -1,3 +1,10 @@
+//
+//  AppDelegate.swift
+//  Nugget Gamining
+//
+//
+
+
 import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -35,6 +35,7 @@ struct GameButton: View {
 // MARK: - GameScene
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var round: Round?
+    let shopVM = RMGShopViewModel()
     private var carrots: [SKSpriteNode] = []
     private var rats:    [SKSpriteNode] = []
     private var resources = 0
@@ -64,8 +65,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     private func loadAttackTextures() {
-        hamsterFrames = (1...2).map { SKTexture(imageNamed: "hamster_attack\($0)") }
-        ratFrames     = (1...2).map { SKTexture(imageNamed: "rat_attack\($0)") }
+        guard let skinItem = shopVM.currentSkinItem else { return }
+        hamsterFrames = (1...2).map { SKTexture(imageNamed: "\(skinItem.name)hamster_attack\($0)") }
+        ratFrames     = (1...2).map { SKTexture(imageNamed: "\(skinItem.name)rat_attack\($0)") }
     }
     
     override func didMove(to view: SKView) {
@@ -86,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resources -= spawnCost
         NotificationCenter.default.post(name: .resourcesChanged, object: nil, userInfo: ["resources": resources])
         spawnCost = Int(Double(spawnCost) * costMultiplier)
-        let x = CGFloat.random(in: 0...size.width)
+        let x = CGFloat.random(in: 100...UIScreen.main.bounds.width - 100)
         spawnHamster(at: CGPoint(x: x, y: hamsterY()))
     }
     @objc private func onHealth() { baseHamHealth += 0.3 }
@@ -143,8 +145,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func loadRats(count: Int) {
+        guard let skinItem = shopVM.currentSkinItem else { return }
         for _ in 0..<count {
-            let r = SKSpriteNode(imageNamed: "rat")
+            let r = SKSpriteNode(imageNamed: "\(skinItem.name)rat")
             r.name = "rat"
             let aspect = r.size.height / r.size.width
             r.size = CGSize(width: 20, height: 20 * aspect)
@@ -169,22 +172,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func spawnInitialHamsters(count: Int) {
         guard let round = round else { return }
-        let spacing = size.width / CGFloat(count + 1)
+        let spacing = UIScreen.main.bounds.width / CGFloat(count + 1)
         for i in 1...(round.rawValue * count) {
-            let x = spacing * CGFloat(i)
+            let x = CGFloat.random(in: 100...UIScreen.main.bounds.width - 100)
             spawnHamster(at: CGPoint(x: x, y: hamsterY()))
         }
     }
     
     private func hamsterY() -> CGFloat { hamsterSize().height/2 + 20 }
     private func hamsterSize() -> CGSize {
-        let t = SKSpriteNode(imageNamed: "hamster")
+        guard let skinItem = shopVM.currentSkinItem else { return CGSize() }
+        let t = SKSpriteNode(imageNamed: "\(skinItem.name)hamster")
         let aspect = t.size.height / t.size.width
         return CGSize(width: 26, height: 26 * aspect)
     }
     
     private func spawnHamster(at pos: CGPoint) {
-        let h = SKSpriteNode(imageNamed: "hamster")
+        guard let skinItem = shopVM.currentSkinItem else { return }
+        let h = SKSpriteNode(imageNamed: "\(skinItem.name)hamster")
         h.name = "hamster"
         let aspect = h.size.height / h.size.width
         h.size = CGSize(width: 26, height: 26 * aspect)

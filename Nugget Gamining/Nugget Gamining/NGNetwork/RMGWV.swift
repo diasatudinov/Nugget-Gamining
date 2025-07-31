@@ -1,3 +1,10 @@
+//
+//  RMGWV.swift
+//  Nugget Gamining
+//
+//
+
+
 import SwiftUI
 import WebKit
 

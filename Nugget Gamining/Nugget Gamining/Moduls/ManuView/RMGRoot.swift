@@ -1,3 +1,10 @@
+//
+//  RMGRoot.swift
+//  Nugget Gamining
+//
+//
+
+
 import SwiftUI
 
 struct RMGRoot: View {
@@ -13,9 +20,9 @@ struct RMGRoot: View {
             } else {
                 VStack {
                     if isLoading {
-                        RMGSplashScreen()
+                        NGLoaderView()
                     } else {
-                        RMGMenuView()
+                        NGMenuView()
                             .onAppear {
                                 AppDelegate.orientationLock = .landscape
                                 setOrientation(.landscapeRight)

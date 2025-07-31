@@ -8,9 +8,12 @@ import SwiftUI
 
 @main
 struct Nugget_GaminingApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RMGRoot()
+                .preferredColorScheme(.light)
         }
     }
 }
