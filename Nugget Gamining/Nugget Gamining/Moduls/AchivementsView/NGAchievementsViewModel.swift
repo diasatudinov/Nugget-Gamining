@@ -1,5 +1,5 @@
 //
-//  RMGAchievementsViewModel.swift
+//  NGAchievementsViewModel.swift
 //  Nugget Gamining
 //
 //
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class RMGAchievementsViewModel: ObservableObject {
+class NGAchievementsViewModel: ObservableObject {
     
     @Published var achievements: [MGAchievement] = [
         MGAchievement(image: "achieve1ImageNG", isAchieved: false),

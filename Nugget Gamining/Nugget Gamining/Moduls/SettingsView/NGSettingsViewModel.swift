@@ -1,5 +1,5 @@
 //
-//  ITTPSettingsViewModel.swift
+//  NGSettingsViewModel.swift
 //  Nugget Gamining
 //
 //
@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-class ITTPSettingsViewModel: ObservableObject {
+class NGSettingsViewModel: ObservableObject {
     @AppStorage("soundEnabled") var soundEnabled: Bool = true
 }

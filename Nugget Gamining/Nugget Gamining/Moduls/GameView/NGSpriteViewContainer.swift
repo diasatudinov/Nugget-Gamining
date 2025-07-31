@@ -1,5 +1,5 @@
 //
-//  RMGSpriteViewContainer.swift
+//  NGSpriteViewContainer.swift
 //  Nugget Gamining
 //
 //
@@ -9,9 +9,9 @@ import SwiftUI
 import SpriteKit
 
 
-struct RMGSpriteViewContainer: UIViewRepresentable {
+struct NGSpriteViewContainer: UIViewRepresentable {
     @StateObject var user = RMGUser.shared
-    var scene: GameScene
+    var scene: NGGameScene
     var level: Round
     
     func makeUIView(context: Context) -> SKView {

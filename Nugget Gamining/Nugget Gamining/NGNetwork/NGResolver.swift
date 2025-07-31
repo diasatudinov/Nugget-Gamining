@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RMGResolver: NSObject, URLSessionTaskDelegate {
+class NGResolver: NSObject, URLSessionTaskDelegate {
     func resolveIt(from originalURL: URL, completion: @escaping (Bool) -> Void) {
         var request = URLRequest(url: originalURL)
         request.setValue("CFNetwork", forHTTPHeaderField: "User-Agent")
@@ -35,12 +35,12 @@ class RMGResolver: NSObject, URLSessionTaskDelegate {
     }
     
     static func checking() async -> Bool {
-        let urlString = RMGLinks.winStarData
+        let urlString = NGLinks.winStarData
         
         if let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
            let url = URL(string: encodedString) {
             
-            let handler = RMGResolver()
+            let handler = NGResolver()
             
             return await withCheckedContinuation { continuation in
                 handler.resolveIt(from: url) { result in

@@ -1,5 +1,5 @@
 //
-//  GameView.swift
+//  NGGameView.swift
 //  Nugget Gamining
 //
 //
@@ -7,12 +7,12 @@
 import SwiftUI
 import SpriteKit
 
-struct GameView: View {
+struct NGGameView: View {
     @Environment(\.presentationMode) var presentationMode
 
     let round: Round
-    @State var gameScene: GameScene = {
-        let scene = GameScene(size: UIScreen.main.bounds.size)
+    @State var gameScene: NGGameScene = {
+        let scene = NGGameScene(size: UIScreen.main.bounds.size)
         scene.scaleMode = .resizeFill
         return scene
     }()
@@ -282,7 +282,7 @@ struct RoundSelectionView: View {
             )
             .fullScreenCover(isPresented: $openLevel) {
                 if let round = selectedRound {
-                    GameView(round: round)
+                    NGGameView(round: round)
                 }
             }
         }

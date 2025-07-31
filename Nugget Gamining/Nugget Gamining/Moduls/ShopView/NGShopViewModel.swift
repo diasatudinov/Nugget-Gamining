@@ -1,5 +1,5 @@
 //
-//  RMGShopViewModel.swift
+//  NGShopViewModel.swift
 //  Nugget Gamining
 //
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-final class RMGShopViewModel: ObservableObject {
+final class NGShopViewModel: ObservableObject {
     // MARK: – Shop catalogues
     @Published var shopBgItems: [RMGItem] = [
         RMGItem(name: "bg1", image: "bgImage1NG", icon: "gameBgIcon1NG", price: 100),

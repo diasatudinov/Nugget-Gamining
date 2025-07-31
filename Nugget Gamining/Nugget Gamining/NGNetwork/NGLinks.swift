@@ -1,5 +1,5 @@
 //
-//  RMGLinks.swift
+//  NGLinks.swift
 //  Nugget Gamining
 //
 //
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class RMGLinks {
+class NGLinks {
     
-    static let shared = RMGLinks()
+    static let shared = NGLinks()
     
     static let winStarData = "https://google.c"
     

@@ -1,5 +1,5 @@
 //
-//  RMGRoot.swift
+//  NGRoot.swift
 //  Nugget Gamining
 //
 //
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RMGRoot: View {
+struct NGRoot: View {
     
     @State private var isLoading = true
     @State var toUp: Bool = true
@@ -75,5 +75,5 @@ struct RMGRoot: View {
 }
 
 #Preview {
-    RMGRoot()
+    NGRoot()
 }
