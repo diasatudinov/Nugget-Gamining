@@ -15,10 +15,9 @@ struct NGMenuView: View {
     @State private var showCalendar = false
     @State private var showDailyTask = false
     
-    //    @StateObject var achievementVM = RMGAchievementsViewModel()
-    //    @StateObject var settingsVM = RMGSettingsViewModel()
-    //    @StateObject var calendarVM = RMGCalendarViewModel()
-    //    @StateObject var shopVM = RMGShopViewModel()
+    @StateObject var achievementVM = RMGAchievementsViewModel()
+    @StateObject var settingsVM = ITTPSettingsViewModel()
+    @StateObject var shopVM = RMGShopViewModel()
     
     var body: some View {
         
@@ -89,19 +88,19 @@ struct NGMenuView: View {
             }
         )
         .fullScreenCover(isPresented: $showGame) {
-//            RMGLevelsMainGameView(shopVM: shopVM)
+            RoundSelectionView()
         }
         .fullScreenCover(isPresented: $showAchievement) {
-//            RMGAchievementsView(viewModel: achievementVM)
+            NGAchievementsView(viewModel: achievementVM)
         }
         .fullScreenCover(isPresented: $showShop) {
-//            RMGShopView(viewModel: shopVM)
+            NGShopView(viewModel: shopVM)
         }
         .fullScreenCover(isPresented: $showSettings) {
-//            RMGSettingsView(settingsVM: settingsVM)
+            NGSettingsView(settingsVM: settingsVM)
         }
         .fullScreenCover(isPresented: $showDailyTask) {
-//            RMGDailyTaskView()
+            NGDailyTasksView()
         }
     }
     

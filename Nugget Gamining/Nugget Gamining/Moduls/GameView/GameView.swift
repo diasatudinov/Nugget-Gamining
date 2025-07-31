@@ -208,25 +208,85 @@ struct GameView: View {
 // MARK: - Game Rounds
 
 enum Round: Int, CaseIterable, Identifiable {
-    case one = 1, two, three, four, five, six
+    case one = 1, two, three, four, five, six, seven, eight, nine, ten
     var id: Int { rawValue }
-    var displayName: String { "Раунд \(rawValue)" }
+    var displayName: String { "\(rawValue)" }
 }
 
 // MARK: - Round Selection Screen
 
 struct RoundSelectionView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @State private var openLevel = false
+    @State private var selectedRound: Round? = nil
     var body: some View {
-        List(Round.allCases) { round in
-            NavigationLink(destination: GameView(round: round)) {
-                Text(round.displayName)
-                    .font(.headline)
-                    .padding(.vertical, 8)
+        ZStack {
+            // Background image layer
+            Image(.appBgNG)
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 16) {
+                ZStack {
+                    HStack {
+                        Image(.levelTextBgNG)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 150 : 80)
+                    }
+                    HStack {
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image(.backIconNG)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140 : 72)
+                        }
+                        Spacer()
+                        NGCoinBg()
+                    }
+                    .padding([.horizontal, .top])
+                }
+                
+                ScrollView {
+                    let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 5)
+                    
+                    LazyVGrid(columns: columns, spacing: 0) {
+                        ForEach(Round.allCases) { round in
+                            Button {
+                                selectedRound = nil
+                                DispatchQueue.main.async {
+                                    selectedRound = round
+                                }
+                                    openLevel = true
+                                
+                            } label: {
+                                ZStack {
+                                    Image(.oneLevelBgNG)
+                                        .resizable()
+                                        .scaledToFit()
+                                    Text("\(round.displayName)")
+                                        .font(.system(size: RMGDeviceManager.shared.deviceType == .pad ? 40:28, weight: .black))
+                                        .foregroundStyle(.white)
+                                }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140 : 72)
+                                
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .padding()
+            .fullScreenCover(isPresented: $openLevel) {
+                if let round = selectedRound {
+                    GameView(round: round)
+                }
             }
         }
     }
 }
-
 // MARK: - Notifications for UI Actions
 
 extension Notification.Name {
