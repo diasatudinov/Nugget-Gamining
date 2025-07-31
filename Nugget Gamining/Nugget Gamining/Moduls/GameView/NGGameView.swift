@@ -16,13 +16,13 @@ struct NGGameView: View {
         scene.scaleMode = .resizeFill
         return scene
     }()
-    @StateObject var shopVM = RMGShopViewModel()
+    @StateObject var shopVM = NGShopViewModel()
     @State private var collected: Int = 0
     @State private var gameOverMessage: String? = nil
     @State private var isWin = false
     var body: some View {
         ZStack {
-            RMGSpriteViewContainer(scene: gameScene, level: round)
+            NGSpriteViewContainer(scene: gameScene, level: round)
                 .ignoresSafeArea()
             
             VStack {
@@ -35,12 +35,12 @@ struct NGGameView: View {
                         Image(.backIconNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140:72)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 140:72)
                     }
                     Spacer()
                     VStack {
-                        NGCoinBg(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                        NGCoinBg(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                         
                         ZStack {
                             Image(.carrotsBGNG)
@@ -48,12 +48,12 @@ struct NGGameView: View {
                                 .scaledToFit()
                             
                             Text("\(collected)")
-                                .font(.system(size: RMGDeviceManager.shared.deviceType == .pad ? 40:20, weight: .black))
+                                .font(.system(size: NGDeviceManager.shared.deviceType == .pad ? 40:20, weight: .black))
                                 .foregroundStyle(.white)
                                 .textCase(.uppercase)
                                 .offset(x: 20)
                             
-                        }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                        }.frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                     }
                 }
                 
@@ -69,7 +69,7 @@ struct NGGameView: View {
                                 Image(.unitsBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:70)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:70)
                             }
                         }
                         
@@ -80,7 +80,7 @@ struct NGGameView: View {
                                 Image(.healthBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:70)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:70)
                             }
                         }
                         
@@ -94,7 +94,7 @@ struct NGGameView: View {
                                 Image(.damageBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:70)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:70)
                             }
                         }
                         
@@ -105,7 +105,7 @@ struct NGGameView: View {
                                 Image(.speedBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:70)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:70)
                             }
                         }
                     }
@@ -131,7 +131,7 @@ struct NGGameView: View {
                                         Image(.nextLevelBtnNG)
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                                     }
                                     
                                     Button {
@@ -140,13 +140,13 @@ struct NGGameView: View {
                                         Image(.menuBtnNG)
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                                     }
-                                }.padding(RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                                }.padding(NGDeviceManager.shared.deviceType == .pad ? 90:50)
                                     .padding(.trailing, 20)
                             }
                         }
-                    }.frame(width: RMGDeviceManager.shared.deviceType == .pad ? 900:500,height: RMGDeviceManager.shared.deviceType == .pad ? 500:280)
+                    }.frame(width: NGDeviceManager.shared.deviceType == .pad ? 900:500,height: NGDeviceManager.shared.deviceType == .pad ? 500:280)
 
                 } else {
                     ZStack {
@@ -160,7 +160,7 @@ struct NGGameView: View {
                                 Image(.retryBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                             }
                             
                             Button {
@@ -169,12 +169,12 @@ struct NGGameView: View {
                                 Image(.menuBtnNG)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 90:50)
+                                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 90:50)
                             }
                         }
                         
                         
-                    }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 480:260)
+                    }.frame(height: NGDeviceManager.shared.deviceType == .pad ? 480:260)
                 }
             }
         }
@@ -186,7 +186,7 @@ struct NGGameView: View {
         .onReceive(NotificationCenter.default.publisher(for: .gameWon)) { _ in
             gameOverMessage = "Победа!"
             isWin = true
-            RMGUser.shared.updateUserMoney(for: 20)
+            NGUser.shared.updateUserMoney(for: 20)
         }
         .onReceive(NotificationCenter.default.publisher(for: .gameLost)) { _ in
             gameOverMessage = "Поражение"
@@ -215,7 +215,7 @@ enum Round: Int, CaseIterable, Identifiable {
 
 // MARK: - Round Selection Screen
 
-struct RoundSelectionView: View {
+struct NGRoundSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var openLevel = false
     @State private var selectedRound: Round? = nil
@@ -228,7 +228,7 @@ struct RoundSelectionView: View {
                         Image(.levelTextBgNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 150 : 80)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 150 : 80)
                     }
                     HStack {
                         Button {
@@ -237,7 +237,7 @@ struct RoundSelectionView: View {
                             Image(.backIconNG)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140 : 72)
+                                .frame(height: NGDeviceManager.shared.deviceType == .pad ? 140 : 72)
                         }
                         Spacer()
                         NGCoinBg()
@@ -263,13 +263,13 @@ struct RoundSelectionView: View {
                                         .resizable()
                                         .scaledToFit()
                                     Text("\(round.displayName)")
-                                        .font(.system(size: RMGDeviceManager.shared.deviceType == .pad ? 40:28, weight: .black))
+                                        .font(.system(size: NGDeviceManager.shared.deviceType == .pad ? 40:28, weight: .black))
                                         .foregroundStyle(.white)
-                                }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 140 : 72)
+                                }.frame(height: NGDeviceManager.shared.deviceType == .pad ? 140 : 72)
                                 
                             }
                         }
-                    }.frame(width: RMGDeviceManager.shared.deviceType == .pad ? 800 : 400)
+                    }.frame(width: NGDeviceManager.shared.deviceType == .pad ? 800 : 400)
                 }
                 
             }

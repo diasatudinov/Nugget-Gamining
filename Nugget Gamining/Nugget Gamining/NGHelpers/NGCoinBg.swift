@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct NGCoinBg: View {
-    @StateObject var user = RMGUser.shared
-    var height: CGFloat = RMGDeviceManager.shared.deviceType == .pad ? 120:70
+    @StateObject var user = NGUser.shared
+    var height: CGFloat = NGDeviceManager.shared.deviceType == .pad ? 120:70
     var body: some View {
         ZStack {
             Image(.coinsBgNG)
@@ -16,7 +16,7 @@ struct NGCoinBg: View {
                 .scaledToFit()
             
             Text("\(user.money)")
-                .font(.system(size: RMGDeviceManager.shared.deviceType == .pad ? 40:20, weight: .black))
+                .font(.system(size: NGDeviceManager.shared.deviceType == .pad ? 40:20, weight: .black))
                 .foregroundStyle(.white)
                 .textCase(.uppercase)
                 .offset(x: 20)

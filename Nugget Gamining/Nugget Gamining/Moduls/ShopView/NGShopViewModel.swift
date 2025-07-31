@@ -10,44 +10,44 @@ import SwiftUI
 
 final class NGShopViewModel: ObservableObject {
     // MARK: – Shop catalogues
-    @Published var shopBgItems: [RMGItem] = [
-        RMGItem(name: "bg1", image: "bgImage1NG", icon: "gameBgIcon1NG", price: 100),
-        RMGItem(name: "bg2", image: "bgImage2NG", icon: "gameBgIcon2NG", price: 100),
-        RMGItem(name: "bg3", image: "bgImage3NG", icon: "gameBgIcon3NG", price: 100),
-        RMGItem(name: "bg4", image: "bgImage4NG", icon: "gameBgIcon4NG", price: 100),
+    @Published var shopBgItems: [NGItem] = [
+        NGItem(name: "bg1", image: "bgImage1NG", icon: "gameBgIcon1NG", price: 100),
+        NGItem(name: "bg2", image: "bgImage2NG", icon: "gameBgIcon2NG", price: 100),
+        NGItem(name: "bg3", image: "bgImage3NG", icon: "gameBgIcon3NG", price: 100),
+        NGItem(name: "bg4", image: "bgImage4NG", icon: "gameBgIcon4NG", price: 100),
     ]
-    @Published var shopSpecialItems: [RMGItem] = [
-        RMGItem(name: "special1", image: "specialImage1NG", icon: "specialIcon1NG", price: 10),
-        RMGItem(name: "special2", image: "specialImage2NG", icon: "specialIcon2NG", price: 10),
-        RMGItem(name: "special3", image: "specialImage3NG", icon: "specialIcon3NG", price: 10),
+    @Published var shopSpecialItems: [NGItem] = [
+        NGItem(name: "special1", image: "specialImage1NG", icon: "specialIcon1NG", price: 10),
+        NGItem(name: "special2", image: "specialImage2NG", icon: "specialIcon2NG", price: 10),
+        NGItem(name: "special3", image: "specialImage3NG", icon: "specialIcon3NG", price: 10),
     ] {
         didSet { saveBoughtSpecials() }
     }
-    @Published var shopSkinItems: [RMGItem] = [
-        RMGItem(name: "skin1", image: "skinImage1NG", icon: "skinIcon1NG", price: 100),
-        RMGItem(name: "skin2", image: "skinImage2NG", icon: "skinIcon2NG", price: 100),
-        RMGItem(name: "skin3", image: "skinImage3NG", icon: "skinIcon3NG", price: 100),
-        RMGItem(name: "skin4", image: "skinImage4NG", icon: "skinIcon4NG", price: 100),
+    @Published var shopSkinItems: [NGItem] = [
+        NGItem(name: "skin1", image: "skinImage1NG", icon: "skinIcon1NG", price: 100),
+        NGItem(name: "skin2", image: "skinImage2NG", icon: "skinIcon2NG", price: 100),
+        NGItem(name: "skin3", image: "skinImage3NG", icon: "skinIcon3NG", price: 100),
+        NGItem(name: "skin4", image: "skinImage4NG", icon: "skinIcon4NG", price: 100),
     ]
     
     // MARK: – Bought
-    @Published var boughtBgItems: [RMGItem] = [
-        RMGItem(name: "bg1", image: "bgImage1NG", icon: "gameBgIcon1NG", price: 100)
+    @Published var boughtBgItems: [NGItem] = [
+        NGItem(name: "bg1", image: "bgImage1NG", icon: "gameBgIcon1NG", price: 100)
     ] {
         didSet { saveBoughtBg() }
     }
 
-    @Published var boughtSkinItems: [RMGItem] = [
-        RMGItem(name: "skin1", image: "skinImage1NG", icon: "skinIcon1NG", price: 100)
+    @Published var boughtSkinItems: [NGItem] = [
+        NGItem(name: "skin1", image: "skinImage1NG", icon: "skinIcon1NG", price: 100)
     ] {
         didSet { saveBoughtSkins() }
     }
     
     // MARK: – Current selections
-    @Published var currentBgItem: RMGItem? {
+    @Published var currentBgItem: NGItem? {
         didSet { saveCurrentBg() }
     }
-    @Published var currentSkinItem: RMGItem? {
+    @Published var currentSkinItem: NGItem? {
         didSet { saveCurrentSkin() }
     }
     
@@ -79,7 +79,7 @@ final class NGShopViewModel: ObservableObject {
     }
     private func loadCurrentBg() {
         if let data = UserDefaults.standard.data(forKey: bgKey),
-           let item = try? JSONDecoder().decode(RMGItem.self, from: data) {
+           let item = try? JSONDecoder().decode(NGItem.self, from: data) {
             currentBgItem = item
         } else {
             currentBgItem = shopBgItems.first
@@ -91,7 +91,7 @@ final class NGShopViewModel: ObservableObject {
     }
     private func loadBoughtBg() {
         if let data = UserDefaults.standard.data(forKey: boughtBgKey),
-           let items = try? JSONDecoder().decode([RMGItem].self, from: data) {
+           let items = try? JSONDecoder().decode([NGItem].self, from: data) {
             boughtBgItems = items
         }
     }
@@ -103,7 +103,7 @@ final class NGShopViewModel: ObservableObject {
     }
     private func loadBoughtSpecial() {
         if let data = UserDefaults.standard.data(forKey: boughtSpecialKey),
-           let items = try? JSONDecoder().decode([RMGItem].self, from: data) {
+           let items = try? JSONDecoder().decode([NGItem].self, from: data) {
             shopSpecialItems = items
         }
     }
@@ -117,7 +117,7 @@ final class NGShopViewModel: ObservableObject {
     }
     private func loadCurrentSkin() {
         if let data = UserDefaults.standard.data(forKey: skinKey),
-           let item = try? JSONDecoder().decode(RMGItem.self, from: data) {
+           let item = try? JSONDecoder().decode(NGItem.self, from: data) {
             currentSkinItem = item
         } else {
             currentSkinItem = shopSkinItems.first
@@ -129,13 +129,13 @@ final class NGShopViewModel: ObservableObject {
     }
     private func loadBoughtSkins() {
         if let data = UserDefaults.standard.data(forKey: boughtSkinKey),
-           let items = try? JSONDecoder().decode([RMGItem].self, from: data) {
+           let items = try? JSONDecoder().decode([NGItem].self, from: data) {
             boughtSkinItems = items
         }
     }
     
     // MARK: – Example buy action
-    func buy(_ item: RMGItem, category: NGItemCategory) {
+    func buy(_ item: NGItem, category: NGItemCategory) {
         switch category {
         case .background:
             guard !boughtBgItems.contains(item) else { return }
@@ -152,7 +152,7 @@ final class NGShopViewModel: ObservableObject {
         }
     }
     
-    func isPurchased(_ item: RMGItem, category: NGItemCategory) -> Bool {
+    func isPurchased(_ item: NGItem, category: NGItemCategory) -> Bool {
         switch category {
         case .background:
             return boughtBgItems.contains(where: { $0.name == item.name })
@@ -163,7 +163,7 @@ final class NGShopViewModel: ObservableObject {
         }
     }
 
-    func selectOrBuy(_ item: RMGItem, user: RMGUser, category: NGItemCategory) {
+    func selectOrBuy(_ item: NGItem, user: NGUser, category: NGItemCategory) {
         
         switch category {
         case .background:
@@ -197,11 +197,11 @@ final class NGShopViewModel: ObservableObject {
         }
     }
     
-    func isMoneyEnough(item: RMGItem, user: RMGUser, category: NGItemCategory) -> Bool {
+    func isMoneyEnough(item: NGItem, user: NGUser, category: NGItemCategory) -> Bool {
         user.money >= item.price
     }
     
-    func isCurrentItem(item: RMGItem, category: NGItemCategory) -> Bool {
+    func isCurrentItem(item: NGItem, category: NGItemCategory) -> Bool {
         switch category {
         case .background:
             guard let currentItem = currentBgItem, currentItem.name == item.name else {
@@ -228,7 +228,7 @@ enum NGItemCategory: String {
     case skin = "skin"
 }
 
-struct RMGItem: Codable, Hashable {
+struct NGItem: Codable, Hashable {
     var id = UUID()
     var name: String
     var image: String
