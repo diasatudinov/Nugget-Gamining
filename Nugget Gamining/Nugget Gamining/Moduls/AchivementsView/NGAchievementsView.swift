@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct NGAchievementsView: View {
-    @StateObject var user = RMGUser.shared
+    @StateObject var user = NGUser.shared
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel: RMGAchievementsViewModel
+    @ObservedObject var viewModel: NGAchievementsViewModel
     var body: some View {
         ZStack {
             VStack {
@@ -24,7 +24,7 @@ struct NGAchievementsView: View {
                             Image(.backIconNG)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 100:60)
+                                .frame(height: NGDeviceManager.shared.deviceType == .pad ? 100:60)
                         }
                         
                         Spacer()
@@ -35,7 +35,7 @@ struct NGAchievementsView: View {
                         Image(.achiTextNG)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 150:80)
+                            .frame(height: NGDeviceManager.shared.deviceType == .pad ? 150:80)
                     }
                 }.padding([.top])
                 
@@ -76,14 +76,14 @@ struct NGAchievementsView: View {
                 Image(item.isAchieved ? .receivedIconNG: .getIconNG)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 80:45)
-                    .offset(y: RMGDeviceManager.shared.deviceType == .pad ? 40:25)
+                    .frame(height: NGDeviceManager.shared.deviceType == .pad ? 80:45)
+                    .offset(y: NGDeviceManager.shared.deviceType == .pad ? 40:25)
                 
             }
-        }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 350:200)
+        }.frame(height: NGDeviceManager.shared.deviceType == .pad ? 350:200)
     }
 }
 
 #Preview {
-    NGAchievementsView(viewModel: RMGAchievementsViewModel())
+    NGAchievementsView(viewModel: NGAchievementsViewModel())
 }

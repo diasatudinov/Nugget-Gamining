@@ -35,7 +35,7 @@ struct GameButton: View {
 // MARK: - GameScene
 class NGGameScene: SKScene, SKPhysicsContactDelegate {
     var round: Round?
-    let shopVM = RMGShopViewModel()
+    let shopVM = NGShopViewModel()
     private var carrots: [SKSpriteNode] = []
     private var rats:    [SKSpriteNode] = []
     private var resources = 0

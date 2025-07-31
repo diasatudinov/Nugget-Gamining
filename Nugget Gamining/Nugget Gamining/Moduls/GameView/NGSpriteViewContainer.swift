@@ -10,7 +10,7 @@ import SpriteKit
 
 
 struct NGSpriteViewContainer: UIViewRepresentable {
-    @StateObject var user = RMGUser.shared
+    @StateObject var user = NGUser.shared
     var scene: NGGameScene
     var level: Round
     

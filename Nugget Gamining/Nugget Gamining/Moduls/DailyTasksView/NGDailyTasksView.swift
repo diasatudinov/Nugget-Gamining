@@ -24,7 +24,7 @@ struct NGDailyTasksView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(
-                                height: RMGDeviceManager.shared.deviceType == .pad ? 140:72
+                                height: NGDeviceManager.shared.deviceType == .pad ? 140:72
                             )
                     }
                     Spacer()
@@ -52,12 +52,12 @@ struct NGDailyTasksView: View {
                             Image(isRecieved ? .recievedBtnNG:.recieveBtnNG)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:72)
+                                .frame(height: NGDeviceManager.shared.deviceType == .pad ? 120:72)
                         }
                     }
                 }.frame(
-                    width: RMGDeviceManager.shared.deviceType == .pad ? 750:440,
-                    height: RMGDeviceManager.shared.deviceType == .pad ? 400:260
+                    width: NGDeviceManager.shared.deviceType == .pad ? 750:440,
+                    height: NGDeviceManager.shared.deviceType == .pad ? 400:260
                 )
                 
                 Spacer()

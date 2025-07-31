@@ -12,7 +12,7 @@ struct Nugget_GaminingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RMGRoot()
+            NGRoot()
                 .preferredColorScheme(.light)
         }
     }
