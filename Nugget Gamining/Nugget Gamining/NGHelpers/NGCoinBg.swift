@@ -8,6 +8,7 @@ import SwiftUI
 
 struct NGCoinBg: View {
     @StateObject var user = RMGUser.shared
+    var height: CGFloat = RMGDeviceManager.shared.deviceType == .pad ? 120:70
     var body: some View {
         ZStack {
             Image(.coinsBgNG)
@@ -22,7 +23,7 @@ struct NGCoinBg: View {
             
             
             
-        }.frame(height: RMGDeviceManager.shared.deviceType == .pad ? 120:70)
+        }.frame(height: height)
         
     }
 }
