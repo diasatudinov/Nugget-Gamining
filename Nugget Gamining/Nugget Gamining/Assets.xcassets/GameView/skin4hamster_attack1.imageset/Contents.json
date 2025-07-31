@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "skin4hamster_attack1.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
